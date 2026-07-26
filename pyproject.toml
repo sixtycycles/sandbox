@@ -1,0 +1,25 @@
+[project]
+name = "orders-app"
+version = "0.1.0"
+description = "Django web application for tracking purchase orders placed with vendors."
+readme = "README.md"
+license = { text = "BSD-3-Clause" }
+requires-python = ">=3.12"
+dependencies = [
+    "Django==6.0.7",
+    "django-localflavor==5.0",
+    "django-widget-tweaks==1.5.1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "black==26.5.1",
+]
+
+[tool.black]
+line-length = 88
+target-version = ["py313"]
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"

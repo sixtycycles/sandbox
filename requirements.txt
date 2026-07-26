@@ -1,4 +1,6 @@
-Django
-django-localflavor
-django-widget-tweaks
-Black
+# Direct dependencies for the orders-app sandbox.
+# NOTE: Django 6.0 requires Python >= 3.12. This project is developed on Python 3.13.
+Django==6.0.7
+django-localflavor==5.0
+django-widget-tweaks==1.5.1
+black==26.5.1
