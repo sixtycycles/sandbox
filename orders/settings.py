@@ -4,12 +4,21 @@ from typing import List
 
 BASE_DIR = Path(__file__).resolve().parent
 
-SECRET_KEY = "SECRETKEY"
+# SECURITY WARNING: keep the secret key used in production secret!
+# Loaded from the environment; the fallback value must NEVER be used in production.
+SECRET_KEY = os.environ.get("SECRET_KEY", "dev-only-insecure-change-me")
 
-DEBUG = True
-AUTH_USER_MODEL = "ordering_system.User"
-ALLOWED_HOSTS = ["localhost", "*"]
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = os.environ.get("DEBUG", "False").lower() in ("1", "true", "yes", "on")
+
+# Hosts/domains this site can serve. No wildcard "*" in production.
+# Comma-separated list via ALLOWED_HOSTS, e.g. "example.com,www.example.com".
+ALLOWED_HOSTS = [
+    h for h in os.environ.get("ALLOWED_HOSTS", "localhost,127.0.0.1,testserver").split(",") if h
+]
+
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+AUTH_USER_MODEL = "ordering_system.User"
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -27,6 +36,8 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
+    # Require login for all views by default; opt out per-view with @login_not_required.
+    "django.contrib.auth.middleware.LoginRequiredMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
@@ -52,6 +63,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "orders.wsgi.application"
 
+
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
@@ -62,6 +74,7 @@ DATABASES = {
         "PORT": "5432",
     }
 }
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -78,11 +91,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = "UTC"
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
+
 
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
