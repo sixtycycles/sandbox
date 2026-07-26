@@ -1,0 +1,24 @@
+{
+  "title": "Long COVID (ME/CFS Subtype) Knowledge Base",
+  "description": "Curated peer-reviewed corpus: mechanisms, treatments/trials, and long COVID<->ME/CFS overlap.",
+  "databases": {
+    "longcovid_mecfs": {
+      "tables": {
+        "sources": {
+          "sort": "theme",
+          "columns": {
+            "doi": "Digital Object Identifier",
+            "impact_tier": "flagship/high/solid",
+            "study_type": "Study design"
+          },
+          "facets": [
+            "theme",
+            "impact_tier",
+            "study_type",
+            "year"
+          ]
+        }
+      }
+    }
+  }
+}
