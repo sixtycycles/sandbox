@@ -5,9 +5,7 @@ from .models import Item, Order
 class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
-        fields = (
-            "vendor",
-        )
+        fields = ("vendor",)
 
 
 class ItemForm(forms.ModelForm):

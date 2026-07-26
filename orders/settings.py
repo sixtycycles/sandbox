@@ -14,7 +14,11 @@ DEBUG = os.environ.get("DEBUG", "False").lower() in ("1", "true", "yes", "on")
 # Hosts/domains this site can serve. No wildcard "*" in production.
 # Comma-separated list via ALLOWED_HOSTS, e.g. "example.com,www.example.com".
 ALLOWED_HOSTS = [
-    h for h in os.environ.get("ALLOWED_HOSTS", "localhost,127.0.0.1,testserver").split(",") if h
+    h
+    for h in os.environ.get("ALLOWED_HOSTS", "localhost,127.0.0.1,testserver").split(
+        ","
+    )
+    if h
 ]
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
@@ -68,10 +72,6 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": os.path.join(BASE_DIR, "orders.db"),
-        "USER": "todo",
-        "PASSWORD": "todo",
-        "HOST": "db",
-        "PORT": "5432",
     }
 }
 

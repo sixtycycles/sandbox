@@ -2,38 +2,27 @@ from django.db import models
 from django.db.models.query import QuerySet
 from django.urls import reverse
 from django.contrib.auth.models import AbstractUser
-from localflavor.us.models import USPostalCodeField, USZipCodeField, USStateField
+from localflavor.us.models import USZipCodeField
 from localflavor.us.us_states import US_STATES, STATE_CHOICES
 
 
-# do a custom user so we can extend later if needed.
+# A custom user so we can extend later if needed.
 class User(AbstractUser):
     uid = models.CharField(max_length=10, default="0000000000")
 
 
 class Vendor(models.Model):
-    name = models.CharField(
-        max_length=250,
-        null=True,
-    )
-    street = models.CharField(
-        max_length=500,
-        null=True,
-    )
-    city = models.CharField(
-        max_length=250,
-        null=True,
-    )
-    state = USStateField(
+    name = models.CharField(max_length=250, null=True)
+    street = models.CharField(max_length=500, null=True)
+    city = models.CharField(max_length=250, null=True)
+    state = models.CharField(
+        max_length=2,
         choices=STATE_CHOICES,
         null=True,
     )
     zip = USZipCodeField()
     email = models.EmailField(null=True)
-    phone = models.CharField(
-        max_length=20,
-        null=True,
-    )
+    phone = models.CharField(max_length=20, null=True)
 
     def __str__(self):
         return f"{self.name}"
@@ -67,19 +56,9 @@ class DeliveryLabel(models.Model):
 
 
 class Order(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, default=0)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     timestamp_created = models.DateTimeField(auto_now=True)
-    # requirements = models.ForeignKey(
-    #     OrderRequirement, on_delete=models.SET_DEFAULT, default=1
-    # )
     vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE)
-    # delivery_label = models.ForeignKey(
-    #     DeliveryLabel,
-    #     models.CASCADE,
-    # )
-    # category = models.CharField(max_length=500, blank=True, default="generic")
-
-    # files = models.ForeignKey(OrderFileUpload, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
         return f"#{self.pk}: {self.user} from {self.vendor}"
@@ -88,32 +67,18 @@ class Order(models.Model):
         return reverse("order-detail", kwargs={"pk": self.pk})
 
 
-# class Order(models.Model):
-#     name = models.CharField(max_length=255)
-#
-#     items: QuerySet["Item"]
-#
-#     class Meta:
-#         verbose_name = "Order"
-#         verbose_name_plural = "Orders"
-#
-#     def __str__(self) -> str:
-#         return f"{self.name}"
-#
-#     def get_absolute_url(self) -> str:
-#         return reverse("order-detail", kwargs={"pk": self.pk})
-
-
 class Item(models.Model):
     class Meta:
         verbose_name = "Order Item"
         verbose_name_plural = "Order Items"
 
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, default=0)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name="items")
     quantity = models.IntegerField(default=1)
     unit = models.CharField(max_length=100, help_text="(The thing you are ordering)")
     catalog_number = models.CharField(max_length=100, blank=True, null=True)
-    cost_per_unit = models.FloatField(blank=True, null=True)
+    cost_per_unit = models.DecimalField(
+        max_digits=10, decimal_places=2, blank=True, null=True
+    )
     description = models.TextField(
         blank=True,
         null=True,
@@ -127,21 +92,4 @@ class Item(models.Model):
         return f"{self.quantity} x {self.unit}"
 
     def get_absolute_url(self) -> str:
-        return reverse("order-item-detail", args=(self.order.id, self.id))
-
-
-# class Item(models.Model):
-#     order = models.ForeignKey(
-#         Order,
-#         related_name="items",
-#         on_delete=models.CASCADE,
-#     )
-#     name = models.CharField(max_length=255)
-#
-#
-#     class Meta:
-#         verbose_name = "Order Item"
-#         verbose_name_plural = "Order Items"
-#
-#     def __str__(self) -> str:
-#         return f"{self.name}"
+        return reverse("item-detail", kwargs={"pk": self.pk})

@@ -20,7 +20,7 @@
                 </tr>
                 </thead>
                 <tbody id="order-items">
-                {% for item in  order.item_set.all %}
+                {% for item in order.items.all %}
                     <tr>
                         <td class="border-0">
                             {{ item.quantity }}
@@ -56,11 +56,10 @@
                             </form>
                         </td>
                     </tr>
-
                 {% endfor %}
-                {% include "ordering_system/order_items.html" with order=order %}
                 </tbody>
             </table>
+
             <div class="card-body " hx-target="#order-items" hx-swap="beforeend">
                 <button hx-get="{% url 'item-create' pk=order.pk %}" type="submit" class="btn btn-primary ">
                     <i class="fas fa-plus"></i>

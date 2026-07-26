@@ -7,5 +7,4 @@ db.sqlite3
 
 
 # dev database (local artifact, not for public repo)
-orders/orders
-orders/orders.db
+orders.db
