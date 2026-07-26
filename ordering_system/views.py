@@ -14,6 +14,7 @@ from .models import Item, Order
 def landing_page(request):
     return render(request, "ordering_system/landing.html")
 
+
 @login_required
 def order_list_view(request):
     context = {}
@@ -21,6 +22,7 @@ def order_list_view(request):
     context["form"] = OrderForm()
 
     return render(request, "ordering_system/order_list.html", context)
+
 
 @login_required
 def order_create_view(request):
@@ -36,12 +38,14 @@ def order_create_view(request):
     context["form"] = form
     return render(request, "ordering_system/order_create_form.html", context)
 
+
 @login_required
 def order_detail_view(request, pk):
     context = {}
     context["order"] = get_object_or_404(Order, pk=pk)
 
     return render(request, "ordering_system/order_detail.html", context)
+
 
 @login_required
 def order_add_item_view(request, pk):
@@ -53,6 +57,7 @@ def order_add_item_view(request, pk):
 
     context["Order"] = Order
     return render(request, "ordering_system/order_items.html", context)
+
 
 @login_required
 def order_edit_view(request, pk):
@@ -69,6 +74,7 @@ def order_edit_view(request, pk):
 
     return render(request, "ordering_system/order_edit.html", context)
 
+
 @login_required
 def order_delete_view(request, pk):
     context = {}
@@ -83,6 +89,7 @@ def order_delete_view(request, pk):
             "POST",
         ]
     )
+
 
 @login_required
 def item_create_view(request, pk):
@@ -102,6 +109,7 @@ def item_create_view(request, pk):
     context["order_id"] = pk
     return render(request, "ordering_system/item_create_form.html", context)
 
+
 @login_required
 def item_edit_view(request, pk):
     context = {}
@@ -116,6 +124,7 @@ def item_edit_view(request, pk):
     context["form"] = form
     return render(request, "ordering_system/item_edit_form.html", context)
 
+
 @login_required
 def item_detail_view(request, pk):
     context = {}
@@ -123,6 +132,7 @@ def item_detail_view(request, pk):
     context["item"] = item
 
     return render(request, "ordering_system/item_detail.html", context)
+
 
 @login_required
 def item_delete_view(request, pk):
