@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Editing order # {{ form.instance.pk }}</h2>
+<form method="POST">
+        {% csrf_token %}
+        {% include 'ordering_system/partials/_base_form.html' with form=form %}
+        <button class="btn btn-primary mt-4" type="submit" >Save</button>
+    </form>
+
+{% endblock content %}

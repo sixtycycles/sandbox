@@ -1,0 +1,3 @@
+{% for item in order.items.all %}
+    {% include "ordering_system/item_detail.html" with item=item %}
+{% endfor %}

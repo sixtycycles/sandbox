@@ -1,0 +1,28 @@
+{%  if list_of_orders %}
+<h3 class="mt-4">Your Orders: </h3>
+
+{%  for order in list_of_orders %}
+    <div class="row">
+    <div class="col">
+        <div class="card mt-2">
+            <div class="card-header">
+                Order #:{{ order.pk }}
+            </div>
+            <div class="card-body">
+            <div class="card-text"> From: {{ order.vendor }}</div>
+
+            </div>
+             <div class="card-footer">
+                    {{ order.item_set.all }}
+                 <a href="{% url 'order-edit' order.pk %}"><button class="btn btn-warning">Edit Order? </button></a>
+                </div>
+        </div>
+
+    </div>
+</div>
+
+{% endfor %}
+
+{% else %}
+<div class=" mt-4 alert alert-info">No orders found for this account.</div>
+{% endif %}

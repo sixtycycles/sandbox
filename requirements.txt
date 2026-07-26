@@ -1,0 +1,4 @@
+Django
+django-localflavor
+django-widget-tweaks
+Black

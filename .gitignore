@@ -1,0 +1,10 @@
+venv/
+*.pyc
+.idea
+db.sqlite3
+.DS_Store
+/nick orders schema/
+
+
+# dev database (local artifact, not for public repo)
+orders/orders

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<div id="order-list-form">
+<h2>Start a New Order</h2>
+    <form>
+        {% csrf_token %}
+        {% include 'ordering_system/partials/_base_form.html' with form=form %}
+        <button class="btn btn-primary mt-4" hx-post="{% url 'order-create' %}" hx-swap="outerHTML" hx-target="#order-list-form">Create</button>
+
+    </form>
+</div>
+{% endblock content %}
+

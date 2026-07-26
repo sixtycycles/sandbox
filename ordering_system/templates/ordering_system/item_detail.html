@@ -1,0 +1,39 @@
+<tr hx-target="this">
+    <td class="border-0">
+        {{ item.quantity }}
+    </td>
+    <td class="border-0">
+        {{ item.unit }}
+    </td>
+    <td class="border-0">
+        {{ item.cost_per_unit }}
+    </td>
+    <td class="border-0">
+        {{ item.catalog_number }}
+    </td>
+    <td class="border-0">
+        {{ item.link_to_item }}
+    </td>
+    <td class="border-0">
+        {{ item.description|truncatewords:4  }}
+    </td>
+
+    <td>
+
+        <button hx-get="{% url 'item-edit' pk=item.pk %}" class="btn btn-primary form-row">
+            Edit
+        </button>
+
+    </td>
+    <td>
+        <form>
+            {% csrf_token %}
+            <button class="btn btn-danger " hx-post="{% url 'item-delete' pk=item.pk %}"
+                    hx-confirm="Are you sure?">
+                Delete
+            </button>
+        </form>
+    </td>
+
+
+</tr>
