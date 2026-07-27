@@ -1,7 +1,7 @@
 [project]
-name = "orders-app"
+name = "pizza-cloud"
 version = "0.1.0"
-description = "Django web application for tracking purchase orders placed with vendors."
+description = "Django web application for tracking orders placed with vendors."
 readme = "README.md"
 license = { text = "BSD-3-Clause" }
 requires-python = ">=3.12"

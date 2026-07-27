@@ -221,14 +221,14 @@ class Migration(migrations.Migration):
                     models.ForeignKey(
                         default=0,
                         on_delete=django.db.models.deletion.CASCADE,
-                        to="ordering_system.user",
+                        to="pizzas.user",
                     ),
                 ),
                 (
                     "vendor",
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.CASCADE,
-                        to="ordering_system.vendor",
+                        to="pizzas.vendor",
                     ),
                 ),
             ],
@@ -278,7 +278,7 @@ class Migration(migrations.Migration):
                     models.ForeignKey(
                         default=0,
                         on_delete=django.db.models.deletion.CASCADE,
-                        to="ordering_system.order",
+                        to="pizzas.order",
                     ),
                 ),
             ],

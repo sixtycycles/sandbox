@@ -1,6 +1,6 @@
-# orders-app
+# pizza-cloud
 
-A Django web application for tracking purchase orders placed with vendors.
+A Django web application for tracking orders placed with vendors.
 Originally an internal lab ordering tool (UCLA EPSS context) — kept here as a
 public sandbox after its private history was archived.
 
@@ -23,13 +23,13 @@ See `requirements.txt` for pinned packages.
 ## Project layout
 
 ```
-orders-app/
+pizza-cloud/
 ├── manage.py                  # Django entry point
-├── orders/                    # Project config package
+├── pizzacloud/               # Project config package
 │   ├── settings.py            # Django settings (DB, apps, middleware)
 │   ├── urls.py                # Root URL config
 │   └── wsgi.py
-├── ordering_system/           # Main application
+├── pizzas/                    # Main application
 │   ├── models.py              # User, Vendor, DeliveryLabel, Order, Item
 │   ├── views.py               # List / detail / create / edit views
 │   ├── forms.py               # Model forms
@@ -73,7 +73,7 @@ python manage.py runserver
 Then open http://localhost:8000/ .
 
 > **Note:** `settings.py` is configured for local development (`DEBUG = True`,
-> an `orders/orders` SQLite database, and a wildcard `ALLOWED_HOSTS`). The
+> a local SQLite database, and `ALLOWED_HOSTS` restrained to localhost). The
 > tracked development database is intentionally **not** committed to this repo.
 > Do not use these settings for production without changing `SECRET_KEY`,
 > `DEBUG`, and the database credentials.

@@ -8,7 +8,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("ordering_system", "0001_initial"),
+        ("pizzas", "0001_initial"),
     ]
 
     operations = [
@@ -25,7 +25,7 @@ class Migration(migrations.Migration):
             field=models.ForeignKey(
                 on_delete=django.db.models.deletion.CASCADE,
                 related_name="items",
-                to="ordering_system.order",
+                to="pizzas.order",
             ),
         ),
         migrations.AlterField(

@@ -117,7 +117,7 @@ class CreateFlowTests(TestCase):
         self.assertEqual(resp.status_code, 302)
         self.assertFalse(Order.objects.exists())
 
-    def test_create_item_assigns_to_the_orders_owner(self):
+    def test_create_item_assigns_to_the_pizzas_owner(self):
         order = Order.objects.create(user=self.user, vendor=self.vendor)
         self.client.force_login(self.user)
         resp = self.client.post(

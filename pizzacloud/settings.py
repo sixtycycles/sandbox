@@ -22,7 +22,7 @@ ALLOWED_HOSTS = [
 ]
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-AUTH_USER_MODEL = "ordering_system.User"
+AUTH_USER_MODEL = "pizzas.User"
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -31,7 +31,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "widget_tweaks",
-    "ordering_system",
+    "pizzas",
 ]
 
 MIDDLEWARE = [
@@ -46,12 +46,12 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "orders.urls"
+ROOT_URLCONF = "pizzacloud.urls"
 
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": ["ordering_system/templates", "orders/templates"],
+        "DIRS": ["pizzas/templates", "pizzacloud/templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -65,13 +65,13 @@ TEMPLATES = [
 ]
 
 
-WSGI_APPLICATION = "orders.wsgi.application"
+WSGI_APPLICATION = "pizzacloud.wsgi.application"
 
 
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "orders.db"),
+        "NAME": os.path.join(BASE_DIR, "pizzacloud.db"),
     }
 }
 

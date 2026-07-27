@@ -30,7 +30,7 @@ def _owned_item(request: HttpRequest, pk: int) -> Item:
 
 @login_not_required
 def landing_page(request):
-    return render(request, "ordering_system/landing.html")
+    return render(request, "pizzas/landing.html")
 
 
 def order_list_view(request):
@@ -38,7 +38,7 @@ def order_list_view(request):
     context["list_of_orders"] = Order.objects.filter(user=request.user)
     context["form"] = OrderForm()
 
-    return render(request, "ordering_system/order_list.html", context)
+    return render(request, "pizzas/order_list.html", context)
 
 
 def order_create_view(request):
@@ -54,14 +54,14 @@ def order_create_view(request):
             return redirect("order-edit", pk=order.pk)
 
     context["form"] = form
-    return render(request, "ordering_system/order_create_form.html", context)
+    return render(request, "pizzas/order_create_form.html", context)
 
 
 def order_detail_view(request, pk):
     context = {}
     context["order"] = _owned_order(request, pk)
 
-    return render(request, "ordering_system/order_detail.html", context)
+    return render(request, "pizzas/order_detail.html", context)
 
 
 def order_edit_view(request, pk):
@@ -75,7 +75,7 @@ def order_edit_view(request, pk):
 
     context["form"] = form
 
-    return render(request, "ordering_system/order_edit.html", context)
+    return render(request, "pizzas/order_edit.html", context)
 
 
 def order_delete_view(request, pk):
@@ -107,7 +107,7 @@ def item_create_view(request, pk):
 
     context["form"] = form
     context["order_id"] = pk
-    return render(request, "ordering_system/item_create_form.html", context)
+    return render(request, "pizzas/item_create_form.html", context)
 
 
 def item_edit_view(request, pk):
@@ -120,7 +120,7 @@ def item_edit_view(request, pk):
         return HttpResponseRedirect(reverse("item-detail", kwargs={"pk": item.pk}))
 
     context["form"] = form
-    return render(request, "ordering_system/item_edit_form.html", context)
+    return render(request, "pizzas/item_edit_form.html", context)
 
 
 def item_detail_view(request, pk):
@@ -128,7 +128,7 @@ def item_detail_view(request, pk):
     item = _owned_item(request, pk)
     context["item"] = item
 
-    return render(request, "ordering_system/item_detail.html", context)
+    return render(request, "pizzas/item_detail.html", context)
 
 
 def item_delete_view(request, pk):

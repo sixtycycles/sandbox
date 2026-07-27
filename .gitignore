@@ -3,8 +3,8 @@ venv/
 .idea
 db.sqlite3
 .DS_Store
-/nick orders schema/
+/nick pizzas schema/
 
 
 # dev database (local artifact, not for public repo)
-orders.db
+pizzacloud.db

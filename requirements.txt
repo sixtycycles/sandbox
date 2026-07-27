@@ -1,4 +1,4 @@
-# Direct dependencies for the orders-app sandbox.
+# Direct dependencies for the Pizza Cloud sandbox.
 # NOTE: Django 6.0 requires Python >= 3.12. This project is developed on Python 3.13.
 Django==6.0.7
 django-localflavor==5.0
